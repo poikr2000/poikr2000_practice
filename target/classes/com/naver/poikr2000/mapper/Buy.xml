@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.poikr2000.service.BuyDAO">
+		<resultMap type="com.naver.poikr2000.entities.Product" id="productMap">
+		<id property="code" column="code"/>
+		<id property="name" column="name"/>
+		<id property="capacity" column="capacity"/>
+		<id property="buyprice" column="buyprice"/>
+		<id property="saleprice" column="saleprice"/>
+		<id property="preyystock" column="preyystock"/>
+		<id property="premmstock" column="premmstock"/>
+		<id property="preddstock" column="preddstock"/>
+		<id property="buy01" column="buy01"/>
+		<id property="buy02" column="buy02"/>
+		<id property="buy03" column="buy03"/>
+		<id property="buy04" column="buy04"/>
+		<id property="buy05" column="buy05"/>
+		<id property="buy06" column="buy06"/>
+		<id property="buy07" column="buy07"/>
+		<id property="buy08" column="buy08"/>
+		<id property="buy09" column="buy09"/>
+		<id property="buy10" column="buy10"/>
+		<id property="buy11" column="buy11"/>
+		<id property="buy12" column="buy12"/>
+		<id property="sale01" column="sale01"/>
+		<id property="sale02" column="sale02"/>
+		<id property="sale03" column="sale03"/>
+		<id property="sale04" column="sale04"/>
+		<id property="sale05" column="sale05"/>
+		<id property="sale06" column="sale06"/>
+		<id property="sale07" column="sale07"/>
+		<id property="sale08" column="sale08"/>
+		<id property="sale09" column="sale09"/>
+		<id property="sale10" column="sale10"/>
+		<id property="sale11" column="sale11"/>
+		<id property="sale12" column="sale12"/>
+		<id property="stock" column="stock"/>
+		<id property="explanation" column="explanation"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Vender" id="venderMap">
+		<id property="code" column="code"/>
+		<id property="name" column="name"/>
+		<id property="busno1" column="busno1"/>
+		<id property="busno2" column="busno2"/>
+		<id property="busno3" column="busno3"/>
+		<id property="ceoname" column="ceoname"/>
+		<id property="zipcode" column="zipcode"/>
+		<id property="newaddr" column="newaddr"/>
+		<id property="oldaddr" column="oldaddr"/>
+		<id property="detailaddr" column="detailaddr"/>
+		<id property="officeno1" column="officeno1"/>
+		<id property="officeno2" column="officeno2"/>
+		<id property="officeno3" column="officeno3"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Buy" id="buyMap">
+		<id property="seq" column="seq"/>
+		<id property="vendcode" column="vendcode"/>
+		<id property="vendname" column="vendname"/>
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="dd" column="dd"/>
+		<id property="no" column="no"/>
+		<id property="hang" column="hang"/>
+		<id property="procode" column="procode"/>
+		<id property="proname" column="proname"/>
+		<id property="price" column="price"/>
+		<id property="qty" column="qty"/>
+		<id property="memo" column="memo"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Salary" id="salaryMap">
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="input_date" column="input_date"/>
+		<id property="birth_date" column="birth_date"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="pay" column="pay"/>
+		<id property="extra" column="extra"/>
+		<id property="yn" column="yn"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.SalaryRoll" id="salaryrollMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="pay12" column="pay12"/>
+		<id property="sumpay" column="sumpay"/>
+		<id property="incomededuction" column="incomededuction"/>
+		<id property="incomeamount" column="incomeamount"/>
+		<id property="personaldeduction" column="personaldeduction"/>
+		<id property="annuityinsurance" column="annuityinsurance"/>
+		<id property="specialdeduction" column="specialdeduction"/>
+		<id property="standardamount" column="standardamount"/>
+		<id property="calculatedtax" column="calculatedtax"/>
+		<id property="incometaxdeduction" column="incometaxdeduction"/>
+		<id property="decidetax" column="decidetax"/>
+		<id property="simpletax" column="simpletax"/>
+	</resultMap>
+		<resultMap type="com.naver.poikr2000.entities.SalaryRegister" id="salaryregisterMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="mmpay" column="mmpay"/>
+		<id property="insurance" column="insurance"/>
+		<id property="tax" column="tax"/>
+		<id property="finalpay" column="finalpay"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Balance" id="balanceMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="vendcode" column="vendcode"/>
+		<id property="preyybalance" column="preyybalance"/>
+		<id property="prebalance01" column="prebalance01"/>
+		<id property="prebalance02" column="prebalance02"/>
+		<id property="prebalance03" column="prebalance03"/>
+		<id property="prebalance04" column="prebalance04"/>
+		<id property="prebalance05" column="prebalance05"/>
+		<id property="prebalance06" column="prebalance06"/>
+		<id property="prebalance07" column="prebalance07"/>
+		<id property="prebalance08" column="prebalance08"/>
+		<id property="prebalance09" column="prebalance09"/>
+		<id property="prebalance10" column="prebalance10"/>
+		<id property="prebalance11" column="prebalance11"/>
+		<id property="prebalance12" column="prebalance12"/>
+		<id property="deal01" column="deal01"/>
+		<id property="deal02" column="deal02"/>
+		<id property="deal03" column="deal03"/>
+		<id property="deal04" column="deal04"/>
+		<id property="deal05" column="deal05"/>
+		<id property="deal06" column="deal06"/>
+		<id property="deal07" column="deal07"/>
+		<id property="deal08" column="deal08"/>
+		<id property="deal09" column="deal09"/>
+		<id property="deal10" column="deal10"/>
+		<id property="deal11" column="deal11"/>
+		<id property="deal12" column="deal12"/>
+		<id property="pay01" column="pay01"/>
+		<id property="pay02" column="pay02"/>
+		<id property="pay03" column="pay03"/>
+		<id property="pay04" column="pay04"/>
+		<id property="pay05" column="pay05"/>
+		<id property="pay06" column="pay06"/>
+		<id property="pay07" column="pay07"/>
+		<id property="pay08" column="pay08"/>
+		<id property="pay09" column="pay09"/>
+		<id property="pay10" column="pay10"/>
+		<id property="pay11" column="pay11"/>
+		<id property="pay12" column="pay12"/>
+		<id property="balance01" column="balance01"/>
+		<id property="balance02" column="balance02"/>
+		<id property="balance03" column="balance03"/>
+		<id property="balance04" column="balance04"/>
+		<id property="balance05" column="balance05"/>
+		<id property="balance06" column="balance06"/>
+		<id property="balance07" column="balance07"/>
+		<id property="balance08" column="balance08"/>
+		<id property="balance09" column="balance09"/>
+		<id property="balance10" column="balance10"/>
+		<id property="balance11" column="balance11"/>
+		<id property="balance12" column="balance12"/>
+		<id property="balance" column="balance"/>
+	</resultMap>
+	<insert id="buyInsertRow" parameterType="hashMap">
+		insert into buy(seq,vendcode,yyyy,mm,dd,no,hang,procode,price,qty,memo
+		)values(
+		((select ifnull(MAX(seq)+1,1) from buy alias_seq)),#{vendcode,jdbcType=VARCHAR},#{yyyy,jdbcType=VARCHAR},#{mm,jdbcType=VARCHAR},#{dd,jdbcType=VARCHAR},
+		#{no,jdbcType=INTEGER},#{hang,jdbcType=INTEGER},#{procode,jdbcType=VARCHAR},
+		#{price,jdbcType=INTEGER},#{qty,jdbcType=INTEGER},#{memo,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="buySelectListAll" parameterType="hashMap" resultMap="buyMap">
+		select seq,vendcode,B.name vendname,yyyy,mm,dd,no,hang,procode,C.name proname,price,qty,memo,sum(price*qty) as total 
+		from buy A, vender B, product C 
+		where A.vendcode=B.code and A.procode=C.code and 
+		vendcode=#{vendcode} and yyyy=#{yyyy} and mm=#{mm} and dd=#{dd}
+		group by no,hang with rollup;
+	</select>
+	<select id="selectSequenceNo" parameterType="hashMap" resultType="Integer">
+		select ifnull(MAX(no)+1,1) from buy alias_seq where 
+		vendcode=#{vendcode} and yyyy=#{yyyy} and mm=#{mm} and dd=#{dd}
+	</select>
+	<select id="buySelectOne" parameterType="String" resultMap="buyMap">
+		select *from buy where seq=#{seq}
+	</select>
+	
+	<delete id="deleteRow" parameterType="String">
+		delete from buy where seq=#{seq}
+	</delete>
+	<select id="SelectBuySearchRollup" parameterType="hashMap" resultMap="buyMap">
+		select seq,vendcode,B.name vendname,yyyy,mm,dd,no,hang,procode,C.name proname,price,qty,memo,sum(price*qty) as total 
+		from buy A, vender B, product C 
+		where A.vendcode=B.code and A.procode=C.code and 
+		vendcode=#{searchvender} and yyyy=#{searchyyyy} and mm=#{searchmm} and dd=#{searchdd}
+		group by no,hang with rollup;
+	</select>
+	<select id="SelectBuyStatementMm" parameterType="hashMap" resultMap="buyMap">
+		select seq,vendcode,B.name vendname,yyyy,mm,dd,no,hang,procode,C.name proname,price,qty,memo,sum(price*qty) as total 
+		from buy A, vender B, product C 
+		where A.vendcode=B.code and A.procode=C.code and yyyy=#{yyyy} and mm=#{mm}
+		group by dd,vendcode,no,hang with rollup;
+	</select>
+	<select id="SelectBuyStatementDd" parameterType="hashMap" resultMap="buyMap">
+		select seq,vendcode,B.name vendname,yyyy,mm,dd,no,hang,procode,C.name proname,price,qty,memo,sum(price*qty) as total 
+		from buy A, vender B, product C 
+		where A.vendcode=B.code and A.procode=C.code and yyyy=#{yyyy} and mm=#{mm} and dd=#{dd}
+		group by vendcode,no,hang with rollup;
+	</select>
+	<update id="updateRow" parameterType="hashMap">
+		update buy set 
+		procode=#{procode},qty=#{qty},memo=#{memo}
+		where seq=#{seq}
+	</update>
+	<insert id="buyBalanceAdd" parameterType="hashMap">
+		insert into balance(yyyy,vendcode,${dealname},${balancename},balance
+		)values(
+		#{yyyy,jdbcType=VARCHAR},#{vendcode,jdbcType=VARCHAR},
+		#{qty}*#{price},#{qty}*#{price},
+		#{qty}*#{price}
+		)on duplicate key update 
+		${dealname}=${dealname}+ #{qty}*#{price},
+		${balancename}=${balancename}+ #{qty}*#{price},
+		balance = balance+ #{qty}*#{price}
+	</insert>
+	<update id="buyDeleteBalance" parameterType="hashMap">
+		update balance set
+		${dealname}=${dealname}- #{qty}*#{price},
+		${balancename}=${balancename}- #{qty}*#{price},
+		balance = balance- #{qty}*#{price}
+		where yyyy=#{yyyy} and vendcode=#{vendcode}
+	</update>
+	<update id="buyUpdateBalance" parameterType="hashMap">
+		update balance set
+		${dealname}=${dealname}- #{beforeqty}*#{price},
+		${balancename}=${balancename}- #{beforeqty}*#{price},
+		balance = balance- #{beforeqty}*#{price}
+		where yyyy=#{yyyy} and vendcode=#{vendcode}
+	</update>
+</mapper>

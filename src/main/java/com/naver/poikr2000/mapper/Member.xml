@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.poikr2000.service.MemberDAO">
+	<resultMap type="com.naver.poikr2000.entities.Member" id="memberMap">
+		<id property="email" column="email"/>
+		<id property="password" column="password"/>
+		<id property="name" column="name"/>
+		<id property="phone1" column="phone1"/>
+		<id property="phone2" column="phone2"/>
+		<id property="phone3" column="phone3"/>
+		<id property="photo" column="photo"/>
+		<id property="memlevel" column="memlevel"/>
+	</resultMap>
+
+
+	<select id="emailConfirm" parameterType="String" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+	<insert id="memberInsert" parameterType="hashMap">
+		insert into member(email,password,name,phone1,phone2,phone3,photo)
+		values(#{email,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},
+		#{phone1,jdbcType=VARCHAR},#{phone2,jdbcType=VARCHAR},#{phone3,jdbcType=VARCHAR},#{photo,jdbcType=VARCHAR})
+	</insert>
+	<select id="memberListAll" parameterType="String" resultMap="memberMap">
+		select *from member
+	</select>
+	<select id="memberGetOne" parameterType="String" resultMap="memberMap">
+		select *from member where email=#{email}
+	</select>
+	<update id="memberUpdate" parameterType="hashMap">
+		update member set password=#{password},name=#{name},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3},
+		photo=#{photo},memlevel=#{memlevel} where email=#{email}
+	</update>
+	<delete id="memberDelete" parameterType="String">
+		delete from member where email=#{email}
+	</delete>
+	<select id="passwordFind" parameterType="hashMap" resultMap="memberMap">
+		select * from member where email=#{email} and name=#{name}
+	</select>
+		<update id="passwordChange" parameterType="hashMap">
+		update member set password=#{password} where email=#{email}
+	</update>
+	
+</mapper>

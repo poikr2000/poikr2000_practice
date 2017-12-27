@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.poikr2000.service.SalaryDAO">
+	<resultMap type="com.naver.poikr2000.entities.Salary" id="salaryMap">
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="input_date" column="input_date"/>
+		<id property="birth_date" column="birth_date"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="pay" column="pay"/>
+		<id property="extra" column="extra"/>
+		<id property="yn" column="yn"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.SalaryRoll" id="salaryrollMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="pay12" column="pay12"/>
+		<id property="sumpay" column="sumpay"/>
+		<id property="incomededuction" column="incomededuction"/>
+		<id property="incomeamount" column="incomeamount"/>
+		<id property="personaldeduction" column="personaldeduction"/>
+		<id property="annuityinsurance" column="annuityinsurance"/>
+		<id property="specialdeduction" column="specialdeduction"/>
+		<id property="standardamount" column="standardamount"/>
+		<id property="calculatedtax" column="calculatedtax"/>
+		<id property="incometaxdeduction" column="incometaxdeduction"/>
+		<id property="decidetax" column="decidetax"/>
+		<id property="simpletax" column="simpletax"/>
+	</resultMap>
+		<resultMap type="com.naver.poikr2000.entities.SalaryRegister" id="salaryregisterMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="mmpay" column="mmpay"/>
+		<id property="insurance" column="insurance"/>
+		<id property="tax" column="tax"/>
+		<id property="finalpay" column="finalpay"/>
+	</resultMap>
+	
+	<select id="empnoConfirm" parameterType="String" resultType="Integer">
+		select count(*) from salary where empno=#{empno}
+	</select>
+	<insert id="insertRow" parameterType="hashMap">
+		insert into salary(empno,name,depart,input_date,birth_date,partner,dependent20,dependent60,disabled,womanpower,pay,extra,yn)
+		values(#{empno,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{depart,jdbcType=VARCHAR},#{input_date,jdbcType=VARCHAR},#{birth_date,jdbcType=VARCHAR},
+		#{partner,jdbcType=INTEGER},#{dependent20,jdbcType=INTEGER},#{dependent60,jdbcType=INTEGER},#{disabled,jdbcType=INTEGER},
+		#{womanpower,jdbcType=INTEGER},#{pay,jdbcType=INTEGER},#{extra,jdbcType=INTEGER},#{yn,jdbcType=INTEGER})
+	</insert>
+	<select id="selectListAll" resultMap="salaryMap">
+		select * from salary
+	</select>
+	<select id="selectGetOne" parameterType="String" resultMap="salaryMap">
+		select * from salary where empno=#{empno}
+	</select>
+	<update id="updateRow" parameterType="hashMap">
+		update salary set empno=#{empno},name=#{name},depart=#{depart},input_date=#{input_date},birth_date=#{birth_date},
+		partner=#{partner},dependent20=#{dependent20},dependent60=#{dependent60},disabled=#{disabled},womanpower=#{womanpower},
+		pay=#{pay},extra=#{extra},yn=#{yn} where empno=#{empno}
+	</update>
+	<delete id="deleteRow" parameterType="String">
+		delete from salary where empno=#{empno}
+	</delete>
+	<select id="selectAllForNew" resultMap="salaryMap">
+		select * from salary where yn = 1
+	</select>
+	<delete id="salaryrollDelete" parameterType="hashMap">
+		delete from salaryroll where yyyy=#{yyyy} and mm=#{mm}
+	</delete>
+	<insert id="salaryrollInsertRow" parameterType="hashMap">
+		insert into salaryroll(
+		yyyy,mm,empno,depart,partner,dependent20,dependent60,disabled,womanpower,pay12,
+		incomededuction,incomeamount,personaldeduction,annuityinsurance,specialdeduction,
+		standardamount,calculatedtax,incometaxdeduction,decidetax,simpletax
+		)values(
+		#{yyyy,jdbcType=VARCHAR},#{mm,jdbcType=VARCHAR},#{empno,jdbcType=VARCHAR},#{depart,jdbcType=VARCHAR},
+		#{partner,jdbcType=INTEGER},#{dependent20,jdbcType=INTEGER},#{dependent60,jdbcType=INTEGER},#{disabled,jdbcType=INTEGER},
+		#{womanpower,jdbcType=INTEGER},#{pay12,jdbcType=INTEGER},#{incomededuction,jdbcType=INTEGER},#{incomeamount,jdbcType=INTEGER},
+		#{personaldeduction,jdbcType=INTEGER},#{annuityinsurance,jdbcType=INTEGER},#{specialdeduction,jdbcType=INTEGER},#{standardamount,jdbcType=INTEGER},
+		#{calculatedtax,jdbcType=INTEGER},#{incometaxdeduction,jdbcType=INTEGER},#{decidetax,jdbcType=INTEGER},#{simpletax,jdbcType=INTEGER}
+		)
+	</insert>
+	<select id="salaryTaxList" parameterType="hashMap" resultMap="salaryrollMap">
+		select yyyy,mm,A.empno,name,A.depart,A.partner,A.dependent20,A.dependent60,A.disabled,A.womanpower,
+		pay12,sum(pay12) as sumpay,incomededuction,incomeamount,personaldeduction,annuityinsurance,specialdeduction,standardamount,
+		calculatedtax,incometaxdeduction,decidetax,simpletax
+		from salaryroll A, salary B
+		where yyyy=#{yyyy} and mm=#{mm} and A.empno=B.empno
+		group by A.depart,pay12 with rollup
+	</select>
+	<select id="salaryTaxDetail" parameterType="String" resultMap="salaryrollMap">
+		select yyyy,mm,A.empno,name,A.depart,A.partner,A.dependent20,A.dependent60,A.disabled,A.womanpower,
+		pay12,incomededuction,incomeamount,personaldeduction,annuityinsurance,specialdeduction,standardamount,
+		calculatedtax,incometaxdeduction,decidetax,simpletax
+		from salaryroll A, salary B
+		where yyyy=#{yyyy} and mm=#{mm}and A.empno=#{empno} and A.empno=B.empno
+	</select>
+	<select id="salaryRegister" parameterType="hashMap" resultMap="salaryregisterMap">
+		select yyyy,mm,A.empno,name,A.depart,A.partner,A.dependent20,A.dependent60,A.disabled,A.womanpower,
+		sum(pay+extra) as mmpay,sum(annuityinsurance) as insurance, sum(simpletax) as tax,sum((pay+extra)-simpletax) as finalpay
+		from salaryroll A, salary B
+		where yyyy=#{yyyy} and mm=#{mm} and A.empno=B.empno
+		group by A.depart,name WITH ROLLUP
+	</select>
+	
+</mapper>

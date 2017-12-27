@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.poikr2000.service.BoardDAO">
+	<resultMap type="com.naver.poikr2000.entities.Board" id="boardMap">
+		<id property="b_email" column="b_email" />
+		<id property="b_name" column="b_name" />
+		<id property="b_password" column="b_password" />
+		<id property="b_title" column="b_title" />
+		<id property="b_content" column="b_content" />
+		<id property="b_ip" column="b_ip" />
+		<id property="b_ref" column="b_ref" />
+		<id property="b_step" column="b_step" />
+		<id property="b_hit" column="b_hit" />
+		<id property="b_level" column="b_level" />
+		<id property="b_attach" column="b_attach" />
+		<id property="b_date" column="b_date" />
+	</resultMap>
+	<insert id="insertRow" parameterType="hashMap">
+		insert into
+		board(b_seq,b_email,b_name,b_password,b_title,b_content,b_ip,b_ref,b_step,b_hit,b_level,b_attach,b_date
+		)values(
+		((select ifnull(MAX(b_seq)+1,1) from board
+		alias_seq)),#{b_email,jdbcType=VARCHAR},#{b_name,jdbcType=VARCHAR},#{b_password,jdbcType=VARCHAR},
+		#{b_title,jdbcType=VARCHAR},#{b_content,jdbcType=VARCHAR},#{b_ip,jdbcType=INTEGER},((select
+		ifnull(MAX(b_seq)+1,1) from board alias_seq)),
+		#{b_step,jdbcType=INTEGER},#{b_hit,jdbcType=INTEGER},#{b_level,jdbcType=INTEGER},#{b_attach,jdbcType=VARCHAR},#{b_date,jdbcType=VARCHAR})
+	</insert>
+	<select id="selectPageListAll" resultMap="boardMap">
+		select * from board order by b_ref desc
+	</select>
+	<select id="selectPageList" resultMap="boardMap">
+		select * from board where
+		b_title like CONCAT('%',#{find},'%') or b_name like
+		CONCAT('%',#{find},'%') order by b_ref desc
+		limit #{startrow},#{endrow}
+	</select>
+	<select id="selectPageCount" resultType="Integer">
+		select count(*) from
+		board where b_title like CONCAT('%',#{find},'%') or b_name like
+		CONCAT('%',#{find},'%')
+	</select>
+	<select id="selectDetail" parameterType="Integer" resultMap="boardMap">
+		select * from board where b_seq=#{b_seq}
+	</select>
+	<delete id="deleteRow" parameterType="Integer">
+		delete from board where b_seq=#{b_seq}
+	</delete>
+	<update id="boardUpdate" parameterType="hashMap">
+		update board set b_title=#{b_title},b_content=#{b_content},b_attach=#{b_attach},b_ip=#{b_ip},b_date=#{b_date} where b_seq=#{b_seq}
+	</update>
+	<update id="updateHit" parameterType="Integer">
+		update board set b_hit=b_hit + 1 where b_seq=#{b_seq}
+	</update>
+	<insert id="insertReplyRow" parameterType="hashMap">
+		insert into
+		board(b_seq,b_email,b_name,b_password,b_title,b_content,b_ip,b_ref,b_step,b_hit,b_level,b_attach,b_date
+		)values(
+		((select ifnull(MAX(b_seq)+1,1) from board
+		alias_seq)),#{b_email,jdbcType=VARCHAR},#{b_name,jdbcType=VARCHAR},#{b_password,jdbcType=VARCHAR},
+		#{b_title,jdbcType=VARCHAR},#{b_content,jdbcType=VARCHAR},#{b_ip,jdbcType=INTEGER},#{b_ref},
+		1,0,
+		#{b_level,jdbcType=INTEGER},#{b_attach,jdbcType=VARCHAR},#{b_date,jdbcType=VARCHAR})
+	</insert>
+	
+</mapper>

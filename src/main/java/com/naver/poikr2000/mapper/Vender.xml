@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.naver.poikr2000.service.VenderDAO">
+		<resultMap type="com.naver.poikr2000.entities.Product" id="productMap">
+		<id property="code" column="code"/>
+		<id property="name" column="name"/>
+		<id property="capacity" column="capacity"/>
+		<id property="buyprice" column="buyprice"/>
+		<id property="saleprice" column="saleprice"/>
+		<id property="preyystock" column="preyystock"/>
+		<id property="premmstock" column="premmstock"/>
+		<id property="preddstock" column="preddstock"/>
+		<id property="buy01" column="buy01"/>
+		<id property="buy02" column="buy02"/>
+		<id property="buy03" column="buy03"/>
+		<id property="buy04" column="buy04"/>
+		<id property="buy05" column="buy05"/>
+		<id property="buy06" column="buy06"/>
+		<id property="buy07" column="buy07"/>
+		<id property="buy08" column="buy08"/>
+		<id property="buy09" column="buy09"/>
+		<id property="buy10" column="buy10"/>
+		<id property="buy11" column="buy11"/>
+		<id property="buy12" column="buy12"/>
+		<id property="sale01" column="sale01"/>
+		<id property="sale02" column="sale02"/>
+		<id property="sale03" column="sale03"/>
+		<id property="sale04" column="sale04"/>
+		<id property="sale05" column="sale05"/>
+		<id property="sale06" column="sale06"/>
+		<id property="sale07" column="sale07"/>
+		<id property="sale08" column="sale08"/>
+		<id property="sale09" column="sale09"/>
+		<id property="sale10" column="sale10"/>
+		<id property="sale11" column="sale11"/>
+		<id property="sale12" column="sale12"/>
+		<id property="stock" column="stock"/>
+		<id property="explanation" column="explanation"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Vender" id="venderMap">
+		<id property="code" column="code"/>
+		<id property="name" column="name"/>
+		<id property="busno1" column="busno1"/>
+		<id property="busno2" column="busno2"/>
+		<id property="busno3" column="busno3"/>
+		<id property="ceoname" column="ceoname"/>
+		<id property="zipcode" column="zipcode"/>
+		<id property="newaddr" column="newaddr"/>
+		<id property="oldaddr" column="oldaddr"/>
+		<id property="detailaddr" column="detailaddr"/>
+		<id property="officeno1" column="officeno1"/>
+		<id property="officeno2" column="officeno2"/>
+		<id property="officeno3" column="officeno3"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Buy" id="buyMap">
+		<id property="seq" column="seq"/>
+		<id property="vendcode" column="vendcode"/>
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="dd" column="dd"/>
+		<id property="no" column="no"/>
+		<id property="hang" column="hang"/>
+		<id property="procode" column="procode"/>
+		<id property="price" column="price"/>
+		<id property="qty" column="qty"/>
+		<id property="memo" column="memo"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.Salary" id="salaryMap">
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="input_date" column="input_date"/>
+		<id property="birth_date" column="birth_date"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="pay" column="pay"/>
+		<id property="extra" column="extra"/>
+		<id property="yn" column="yn"/>
+	</resultMap>
+	<resultMap type="com.naver.poikr2000.entities.SalaryRoll" id="salaryrollMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="pay12" column="pay12"/>
+		<id property="sumpay" column="sumpay"/>
+		<id property="incomededuction" column="incomededuction"/>
+		<id property="incomeamount" column="incomeamount"/>
+		<id property="personaldeduction" column="personaldeduction"/>
+		<id property="annuityinsurance" column="annuityinsurance"/>
+		<id property="specialdeduction" column="specialdeduction"/>
+		<id property="standardamount" column="standardamount"/>
+		<id property="calculatedtax" column="calculatedtax"/>
+		<id property="incometaxdeduction" column="incometaxdeduction"/>
+		<id property="decidetax" column="decidetax"/>
+		<id property="simpletax" column="simpletax"/>
+	</resultMap>
+		<resultMap type="com.naver.poikr2000.entities.SalaryRegister" id="salaryregisterMap">
+		<id property="yyyy" column="yyyy"/>
+		<id property="mm" column="mm"/>
+		<id property="empno" column="empno"/>
+		<id property="name" column="name"/>
+		<id property="depart" column="depart"/>
+		<id property="partner" column="partner"/>
+		<id property="dependent20" column="dependent20"/>
+		<id property="dependent60" column="dependent60"/>
+		<id property="disabled" column="disabled"/>
+		<id property="womanpower" column="womanpower"/>
+		<id property="mmpay" column="mmpay"/>
+		<id property="insurance" column="insurance"/>
+		<id property="tax" column="tax"/>
+		<id property="finalpay" column="finalpay"/>
+	</resultMap>
+		<delete id="venderDeleteRow" parameterType="String">
+		delete from vender where code=#{code}
+	</delete>
+	<select id="venderSelectOne" parameterType="String" resultMap="venderMap">
+		select * from vender where code=#{code}
+	</select>
+	<update id="venderUpdateRow" parameterType="hashMap">
+		update vender set 
+		code=#{code},name=#{name},busno1=#{busno1},busno2=#{busno2},busno3=#{busno3},
+		ceoname=#{ceoname},zipcode=#{zipcode},newaddr=#{newaddr},oldaddr=#{oldaddr},detailaddr=#{detailaddr},
+		officeno1=#{officeno1},officeno2=#{officeno2},officeno3=#{officeno3} where code=#{code}
+	</update>
+	<select id="venderSelectBuyListAll" resultMap="venderMap">
+		select * from vender where <![CDATA[ code < 5000 ]]>
+	</select>
+	<select id="venderSelectSaleListAll" resultMap="venderMap">
+		select * from vender where <![CDATA[ code > 5000 ]]>
+	</select>
+	<select id="venderSelectListAll" resultMap="venderMap">
+		select * from vender
+	</select>
+	<insert id="venderInsertRow" parameterType="hashMap">
+		insert into vender(code,name,busno1,busno2,busno3,ceoname,zipcode,
+		newaddr,oldaddr,detailaddr,officeno1,officeno2,officeno3
+		)values(
+		#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{busno1,jdbcType=VARCHAR},#{busno2,jdbcType=VARCHAR},#{busno3,jdbcType=VARCHAR},
+		#{ceoname,jdbcType=VARCHAR},#{zipcode,jdbcType=VARCHAR},#{newaddr,jdbcType=VARCHAR},#{oldaddr,jdbcType=VARCHAR},#{detailaddr,jdbcType=VARCHAR},
+		#{officeno1,jdbcType=VARCHAR},#{officeno2,jdbcType=VARCHAR},#{officeno3,jdbcType=VARCHAR})
+	</insert>
+		<select id="venderConfirm" parameterType="String" resultType="Integer">
+		select count(*) from vender where code=#{code}
+	</select>
+</mapper>
